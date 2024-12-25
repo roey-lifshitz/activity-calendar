@@ -37,6 +37,9 @@ export class ActivityCalendarComponent {
   @ViewChild('calendar', { static: false }) calendar!: CalendarComponent;
 
   protected onDateChanged(event: CustomEvent) {
-    this.changedDate.emit(event.detail.value[0]);
+    const { value } = event.detail;
+    if (value.length === 1) {
+      this.changedDate.emit(value[0]);
+    }
   }
 }
