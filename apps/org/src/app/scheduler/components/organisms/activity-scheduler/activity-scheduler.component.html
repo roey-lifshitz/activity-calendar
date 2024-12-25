@@ -1,2 +1,8 @@
-<app-activity-schedule [currentDate]="selectedDate()"></app-activity-schedule>
-<app-activity-calendar [currentDate]="selectedDate()"></app-activity-calendar>
+<app-activity-schedule
+  (changedDate)="onDateChanged($event)"
+  [currentDate]="selectedDate()"
+></app-activity-schedule>
+<app-activity-calendar
+  (changedDate)="onDateChanged($event)"
+  [currentDate]="selectedDate()"
+></app-activity-calendar>

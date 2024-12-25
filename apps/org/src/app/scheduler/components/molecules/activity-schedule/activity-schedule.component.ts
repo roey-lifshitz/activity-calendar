@@ -3,6 +3,8 @@ import {
   effect,
   input,
   InputSignal,
+  output,
+  OutputEmitterRef,
   ViewChild,
 } from '@angular/core';
 import {
@@ -22,11 +24,11 @@ export class ActivityScheduleComponent {
   public $currentDate: InputSignal<Date> = input.required({
     alias: 'currentDate',
   });
+  public changedDate: OutputEmitterRef<Date> = output();
 
   @ViewChild('scheduler', { static: false }) scheduler!: SchedulerComponent;
-  constructor() {
-    effect(() => {
-      console.log(this.$currentDate());
-    });
+
+  protected onDateChanged(event: CustomEvent) {
+    this.changedDate.emit(event.detail.oldValue);
   }
 }

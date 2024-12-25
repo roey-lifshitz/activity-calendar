@@ -1,6 +1,6 @@
 // counter.reducer.ts
 import { createReducer, on } from '@ngrx/store';
-import { changeDate } from './selected-date.actions';
+import { changeSelectedDate } from './selected-date.actions';
 import { SelectedDateState } from './selected-date.interface';
 
 export const selectedDateKey = 'selectedDate';
@@ -11,5 +11,8 @@ const selectedDateInitialState: SelectedDateState = {
 
 export const selectedDateReducer = createReducer(
   selectedDateInitialState,
-  on(changeDate, (state, { newDate }) => ({ ...state, selectedDate: newDate }))
+  on(changeSelectedDate, (state, { newDate }) => ({
+    ...state,
+    selectedDate: newDate,
+  }))
 );

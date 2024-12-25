@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-export const changeDate = createAction(
+export const changeSelectedDate = createAction(
   '[Selected Date] change',
   props<{ newDate: Date }>()
 );

@@ -3,4 +3,5 @@
   [view]="'week'"
   [firstDayOfWeek]="1"
   [dateCurrent]="$currentDate()"
+  (onDateChange)="onDateChanged($event)"
 ></smart-scheduler>

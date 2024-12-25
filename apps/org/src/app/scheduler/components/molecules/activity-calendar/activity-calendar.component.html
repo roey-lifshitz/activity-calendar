@@ -1,1 +1,5 @@
-<smart-calendar #calendar [selectedDates]="$selectedDates()"></smart-calendar>
+<smart-calendar
+  #calendar
+  [selectedDates]="$selectedDates()"
+  (onChange)="onDateChanged($event)"
+></smart-calendar>

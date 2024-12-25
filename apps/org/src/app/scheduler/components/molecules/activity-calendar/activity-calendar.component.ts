@@ -4,6 +4,8 @@ import {
   effect,
   input,
   InputSignal,
+  output,
+  OutputEmitterRef,
   ViewChild,
 } from '@angular/core';
 import {
@@ -22,8 +24,8 @@ export class ActivityCalendarComponent {
   public $currentDate: InputSignal<Date> = input.required({
     alias: 'currentDate',
   });
+  public changedDate: OutputEmitterRef<Date> = output();
 
-  @ViewChild('calendar', { static: false }) calendar!: CalendarComponent;
   protected $selectedDates = computed(() => {
     const date = this.$currentDate();
     return [
@@ -31,4 +33,10 @@ export class ActivityCalendarComponent {
       new Date(date.getFullYear(), date.getMonth() + 1, 0),
     ];
   });
+
+  @ViewChild('calendar', { static: false }) calendar!: CalendarComponent;
+
+  protected onDateChanged(event: CustomEvent) {
+    this.changedDate.emit(event.detail.value[0]);
+  }
 }
