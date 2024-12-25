@@ -1,4 +1,10 @@
-import { Component, input, InputSignal, ViewChild } from '@angular/core';
+import {
+  Component,
+  effect,
+  input,
+  InputSignal,
+  ViewChild,
+} from '@angular/core';
 import {
   SchedulerComponent,
   SchedulerModule,
@@ -18,4 +24,9 @@ export class ActivityScheduleComponent {
   });
 
   @ViewChild('scheduler', { static: false }) scheduler!: SchedulerComponent;
+  constructor() {
+    effect(() => {
+      console.log(this.$currentDate());
+    });
+  }
 }

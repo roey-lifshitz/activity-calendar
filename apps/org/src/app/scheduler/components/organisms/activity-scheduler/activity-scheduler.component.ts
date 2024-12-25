@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivityScheduleComponent } from '../../molecules/activity-schedule/activity-schedule.component';
 import { ActivityCalendarComponent } from '../../molecules/activity-calendar/activity-calendar.component';
+import { Store } from '@ngrx/store';
+import { selectSelectedDate } from '../../../../store/selected-date/selected-date.selectors';
 
 @Component({
   imports: [ActivityScheduleComponent, ActivityCalendarComponent],
@@ -10,5 +12,6 @@ import { ActivityCalendarComponent } from '../../molecules/activity-calendar/act
   styleUrl: './activity-scheduler.component.scss',
 })
 export class ActivitySchedulerComponent {
-  public selectedDate = signal(new Date());
+  private readonly _store: Store = inject(Store);
+  public selectedDate = this._store.selectSignal(selectSelectedDate);
 }

@@ -1,4 +1,11 @@
-import { Component, input, InputSignal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  InputSignal,
+  ViewChild,
+} from '@angular/core';
 import {
   CalendarComponent,
   CalendarModule,
@@ -16,5 +23,12 @@ export class ActivityCalendarComponent {
     alias: 'currentDate',
   });
 
-  @ViewChild('calendar', { static: false }) scheduler!: CalendarComponent;
+  @ViewChild('calendar', { static: false }) calendar!: CalendarComponent;
+  protected $selectedDates = computed(() => {
+    const date = this.$currentDate();
+    return [
+      new Date(date.getFullYear(), date.getMonth(), 1),
+      new Date(date.getFullYear(), date.getMonth() + 1, 0),
+    ];
+  });
 }
