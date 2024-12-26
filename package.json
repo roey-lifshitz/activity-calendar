@@ -23,6 +23,7 @@
     "@ngrx/store": "^19.0.0",
     "@ngrx/store-devtools": "^19.0.0",
     "axios": "^1.6.0",
+    "jwt-decode": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.8.0",
     "smart-webcomponents-angular": "^21.0.0",

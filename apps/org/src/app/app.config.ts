@@ -6,11 +6,14 @@ import {
   selectedDateKey,
   selectedDateReducer,
 } from './store/selected-date/selected-date.reducer';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './login/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
     provideStore({ [selectedDateKey]: selectedDateReducer }),
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
 };
