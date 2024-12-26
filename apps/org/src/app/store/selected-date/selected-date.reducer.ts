@@ -6,7 +6,7 @@ import { SelectedDateState } from './selected-date.interface';
 export const selectedDateKey = 'selectedDate';
 
 const selectedDateInitialState: SelectedDateState = {
-  selectedDate: new Date(Date.now() - 5 * 12 * 30 * 24 * 60 * 60 * 1000),
+  selectedDate: new Date(),
 };
 
 export const selectedDateReducer = createReducer(
