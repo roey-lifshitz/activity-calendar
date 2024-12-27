@@ -9,6 +9,7 @@ import { AuthState } from '../types/auth-state.type';
   providedIn: 'root',
 })
 export class AuthService {
+  private readonly url = '/api/auth';
   private state = signal<AuthState>({
     user: null,
     token: localStorage.getItem('token'),
@@ -25,14 +26,15 @@ export class AuthService {
 
   private loadStoredUser(): void {
     if (this.state().token) {
-      // Verify token by making an API call
+      debugger;
       this.http
-        .get<User>('/api/auth/me')
+        .get<User>(`${this.url}/me`)
         .pipe(
           tap((user) => {
             this.state.update((s) => ({ ...s, user }));
           }),
-          catchError(() => {
+          catchError((e) => {
+            console.log(e);
             this.logout();
             return throwError(() => new Error('Invalid token'));
           })
@@ -47,7 +49,7 @@ export class AuthService {
   ): Observable<{ token: string; user: User }> {
     this.state.update((s) => ({ ...s, loading: true }));
     return this.http
-      .post<{ token: string; user: User }>('/api/auth/login', {
+      .post<{ token: string; user: User }>(`${this.url}/login`, {
         email,
         password,
       })
