@@ -11,6 +11,8 @@ import { AuthService } from '../../../services/auth.service';
 export class LoginPageComponent {
   private readonly _authServiceNOTREAL: AuthService = inject(AuthService);
   public loginTESTINGNOTREAL() {
-    this._authServiceNOTREAL.login('fake@yahoo.con', 'Pa55w0rd').subscribe();
+    this._authServiceNOTREAL
+      .login({ email: 'fake@yahoo.con', password: 'Pa55w0rd' })
+      .subscribe();
   }
 }

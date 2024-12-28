@@ -1,13 +1,12 @@
-import { inject, Injector } from '@angular/core';
+import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { TokenService } from '../services/toke.service';
 
 export const authGuard = () => {
-  const injector = inject(Injector); // Use Injector to avoid eager resolution
-  const authService = injector.get(AuthService);
-  const router = injector.get(Router);
+  const tokenService: TokenService = inject(TokenService);
+  const router: Router = inject(Router);
 
-  if (!authService.isAuthenticated()) {
+  if (!tokenService.getToken()) {
     router.navigate(['/login']);
     return false;
   }

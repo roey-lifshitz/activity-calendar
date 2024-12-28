@@ -1,15 +1,14 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject, Injector } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { inject } from '@angular/core';
+import { TokenService } from '../services/toke.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const injector = inject(Injector); // Inject Injector instead of AuthService directly
-  const authService = injector.get(AuthService); // Lazy resolve AuthService
+  const tokenService = inject(TokenService);
+  const token = tokenService.getToken();
 
-  if (authService.isAuthenticated()) {
-    const token = localStorage.getItem('token');
+  if (token) {
     req = req.clone({
-      setHeaders: { Authorization: `Bearer ${token}` },
+      headers: req.headers.set('Authorization', `Bearer ${token}`),
     });
   }
 
